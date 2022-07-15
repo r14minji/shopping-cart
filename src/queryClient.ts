@@ -61,8 +61,9 @@ export const restfetcher = async ({
   }
 }
 
-export const qraphqlFetcher = (query : RequestDocument, variables ={}) => request(BASE_URL, query, variables)
+export const graphqlFetcher = (query : RequestDocument, variables ={}) => request(BASE_URL, query, variables)
 
 export const QueryKeys = {
   PRODUCTS: 'PRODUCTS',
+  CART: 'CART'
 }
