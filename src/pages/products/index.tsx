@@ -1,15 +1,10 @@
 import { useQuery } from "react-query"
 import ProductItem from "../../components/product/item"
-import { fetcher, QueryKeys } from "../../queryClient"
-import { Product } from "../../types"
+import GET_PRODUCTS, { Products } from "../../graphql/products"
+import { qraphqlFetcher, QueryKeys } from "../../queryClient"
 
 const ProductList = () => {
-  const { data } = useQuery(QueryKeys.PRODUCTS, () => 
-    fetcher({
-      method: 'GET',
-      path: '/products'
-    })
-  )
+  const { data } = useQuery<Products>(QueryKeys.PRODUCTS, () => qraphqlFetcher( GET_PRODUCTS ))
 
   //console.log(data)
 
@@ -17,7 +12,7 @@ const ProductList = () => {
     <div>
       <h2>상품목록</h2>
       <ul className="products">
-        {data ?.map(product => (
+        {data?.products?.map(product => (
           <ProductItem {...product} key={product.id} />
         ))}
       </ul>
